@@ -11,9 +11,9 @@ from telegram.ext import (
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-BOT_TOKEN = "8325860493:AAHB8QkjRiDW715VckSZJM1UYFWB4mhnw5A" 
-ADMIN_ID = 7928982775
-REQUIRED_CHANNEL = "@joinourchannelnkw"
+BOT_TOKEN ="code" 
+ADMIN_ID = 79l
+REQUIRED_CHANNEL = "@"
 
 if not BOT_TOKEN:
     logger.error("TELEGRAM_BOT_TOKEN not set. Exiting.")
