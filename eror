@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+int xor2div(char *in, char *out, int mode){
+    char gen[100] = "110101";
+    int j, k;
+    strcpy(out, in);
+    if (mode)
+        strcat(out, "00000");
+    for (j = 0; j < strlen(in); j++)
+        if (out[j] == '1')
+            for (k = 0; k < strlen(gen); k++)
+                if (((out[j + k] == '0') && (gen[k] == '0')) || ((out[j + k] == '1') && (gen[k] == '1')))
+                    out[j + k] = '0';
+                else
+                    out[j + k] = '1';
+    for (j = 0; j < strlen(out); j++)
+        if (out[j] == '1')
+            return 1;
+    return 0;
+}
+void main(){
+    char in[100] = {'\0'}, out[100] = {'\0'}, rec[100] = {'\0'};
+    char gen[100] = "110101";
+    printf("Enter the message code in binary: ");
+    scanf("%s", in);
+    printf("The generator polynomial is: %s\n", gen);
+    xor2div(in, out, 1);
+    printf("\nCRC code to Transmit is: %s%s", in, out + strlen(in));
+    printf("\nEnter the received frame: ");
+    scanf("%s", rec);
+    if (xor2div(rec, out, 0))
+        printf("\nError is found in the received frame.");
+    else
+        printf("\nNo Error is found in the received frame.");
+}
