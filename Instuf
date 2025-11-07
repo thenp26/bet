@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+int main(){
+    char in[50], s[100] = "01111110", d[50];
+    int i, j = 8, k = 0, c = 0;
+    printf("Enter the input bit stream: ");
+    scanf("%s", in);
+    for (i = 0; in[i]; i++){
+        s[j++] = in[i];
+        c = in[i] == '1' ? c + 1 : 0;
+        if (c == 5){
+            s[j++] = '0';
+            c = 0;
+        }
+    }
+    strcat(s, "01111110");
+    printf("Stuffed Data: %s\n", s);
+    for (i = 8, c = 0; i < strlen(s) - 8; i++){
+        d[k++] = s[i];
+        c = s[i] == '1' ? c + 1 : 0;
+        if (c == 5){
+            i++;
+            c = 0;
+        }
+    }
+    d[k] = 0;
+    printf("Destuffed Data: %s\n", d);
+}
