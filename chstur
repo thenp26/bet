@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+int main(){
+    char data[100], stuffed[200], destuffed[100], FLAG = 'F', ESC = 'E';
+    int i, j = 0, k = 0;
+    printf("Enter the input character stream: ");
+    scanf("%[^\n]", data);
+    stuffed[j++] = FLAG; // Start Flag
+    for (i = 0; i < strlen(data); i++){
+        if (data[i] == FLAG || data[i] == ESC){
+            stuffed[j++] = ESC; // Escape it
+        }
+        stuffed[j++] = data[i];
+    }
+    stuffed[j++] = FLAG; // End Flag
+    stuffed[j] = '\0';
+    printf("Stuffed Data: %s\n", stuffed);
+    for (i = 1; i < j - 1; i++){ // skip start and end FLAG
+        if (stuffed[i] == ESC){
+            i++; // skip ESC, take next byte
+        }
+        destuffed[k++] = stuffed[i];
+    }
+    destuffed[k] = '\0';
+    printf("Destuffed Data: %s\n", destuffed);
+    return 0;
+}
